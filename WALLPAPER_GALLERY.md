@@ -1,10 +1,3 @@
-# Wallpapers
-
-## This repo is a collection of wallpapers which are curated from different sources and are used by me on my personal setup.
-
-### Preview
-
-<!-- WALLPAPER_GALLERY -->
 ## Wallpaper Gallery
 
 | --- | --- | --- |
@@ -55,6 +48,3 @@
 | ![](wallhaven-dpr6jl_nord.jpg) | ![](wallhaven-o566w7_nord.png) | ![](wallhaven-o5xrep_nord.jpg) |
 | --- | --- |
 | ![](wallhaven-vqg8v5_nord.jpg) | ![](windows-xp.jpg) |
-
-<!-- END_WALLPAPER_GALLERY -->
-
