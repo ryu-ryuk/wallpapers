@@ -1,0 +1,34 @@
+name: Update Wallpaper Gallery
+
+on:
+  push:
+    paths:
+      - "*.jpg"
+      - "*.jpeg"
+      - "*.png"
+      - "*.webp"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: generate gallery
+        run: |
+          python gen.py
+          python update_readme.py
+
+      - name: commit changes
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add README.md WALLPAPER_GALLERY.md
+          git commit -m "auto: update wallpaper gallery" || echo "no changes"
+          git push
+
