@@ -7,28 +7,29 @@ on:
       - "*.jpeg"
       - "*.png"
       - "*.webp"
+      - "*.gif"
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  update-gallery:
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
 
-      - name: setup python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: "3.10"
 
-      - name: generate gallery
+      - name: Generate markdown gallery
         run: |
           python gen.py
           python update_readme.py
 
-      - name: commit changes
+      - name: Commit and push changes
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add README.md WALLPAPER_GALLERY.md
-          git commit -m "auto: update wallpaper gallery" || echo "no changes"
+          git commit -m "auto: update wallpaper gallery" || echo "no changes to commit"
           git push
 
