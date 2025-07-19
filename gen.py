@@ -15,9 +15,13 @@ rows = [images[i : i + cols] for i in range(0, len(images), cols)]
 with open(output_file, "w") as f:
     f.write("## Wallpaper Gallery\n\n")
 
-    f.write("| " + " | ".join([" "] * cols) + " |\n")
-    f.write("| " + " | ".join(["---"] * cols) + " |\n")
+    # this markdown table header is just for structure; it won't be visible
+    f.write("| " * (cols + 1) + "\n")
+    f.write("|" + "---|" * cols + "\n")
 
     for row in rows:
-        row_md = "| " + " | ".join(f"![]({img})" for img in row) + " |\n"
+        # we use an html img tag to set a fixed width, forcing columns to be even
+        row_md = (
+            "| " + " | ".join(f'<img src="{img}" width="400">' for img in row) + " |\n"
+        )
         f.write(row_md)
