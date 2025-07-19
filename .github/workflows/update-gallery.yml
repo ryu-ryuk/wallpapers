@@ -16,8 +16,7 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
+      contents: write 
 
     steps:
       - name: checkout repo
@@ -28,42 +27,20 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: install deps
-        run: pip install pillow
-
       - name: generate markdown gallery
         run: |
           python gen.py
           python update_readme.py
 
-      - name: create and auto-merge pull request
-        env:
-          # use the default token which has the permissions we set above
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: commit and push changes
         run: |
-          # configure git
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # create a new branch
-          BRANCH_NAME="auto-gallery-update/${{ github.run_id }}"
-          git checkout -b $BRANCH_NAME
-
-          # add and commit changes if they exist
           git add README.md WALLPAPER_GALLERY.md
+          # commit only if there are changes
           if ! git diff --cached --quiet; then
-            echo "changes found, creating pull request..."
             git commit -m "auto: update wallpaper gallery"
-            git push origin $BRANCH_NAME
-            
-            # create the pull request
-            gh pr create \
-              --title "Auto: Update Wallpaper Gallery" \
-              --body "Automated wallpaper gallery update." \
-              --base main
-              
-            # merge the pull request automatically
-            gh pr merge $BRANCH_NAME --squash --delete-branch
+            git push
           else
             echo "no changes to commit."
           fi
