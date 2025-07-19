@@ -63,7 +63,7 @@ jobs:
               --base main
               
             # merge the pull request automatically
-            gh pr merge $BRANCH_NAME --auto --squash --delete-branch
+            gh pr merge $BRANCH_NAME --squash --delete-branch
           else
             echo "no changes to commit."
           fi
