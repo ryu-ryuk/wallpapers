@@ -3,7 +3,7 @@
 ## This repo is a collection of wallpapers which are curated from different sources and are used by me on my personal setup.
 
 > [!IMPORTANT]
-> If you want to use my catppuccin themed rofi wallpaper switcher scripts / rasi files: you can check out `.config/scripts` and related files in [my dots](https://github.com/ryu-ryuk/dots)
+> If you want to use my catppuccin themed rofi wallpaper switcher or randomizer scripts and rasi files: you can check out `.config/scripts` and related files in [my dots](https://github.com/ryu-ryuk/dots)
 
 
 
