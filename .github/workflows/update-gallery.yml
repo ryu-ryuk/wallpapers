@@ -13,43 +13,28 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: '3.11'
 
       - name: Install deps
         run: pip install pillow
-
-      - name: Debug: Show current branch and user
-        run: |
-          git branch
-          whoami
-          git config --global --list
-
-      - name: Debug: Check if token is valid
-        env:
-          TOKEN: ${{ secrets.P }}
-        run: |
-          echo "checking token auth..."
-          curl -H "Authorization: token ${TOKEN}" https://api.github.com/user
 
       - name: Generate markdown gallery
         run: |
           python gen.py
           python update_readme.py
 
-      - name: Debug: Show git status
-        run: |
-          git status
-          git diff
-
       - name: Commit and push changes
         env:
           TOKEN: ${{ secrets.P }}
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
           git add README.md WALLPAPER_GALLERY.md
-          git diff --cached --quiet || git commit -m "auto: update wallpaper gallery"
-          echo "trying to push..."
-          git push origin HEAD:main
-
+          if ! git diff --cached --quiet; then
+            git commit -m "auto: update wallpaper gallery"
+            echo "pushing changes..."
+            git push origin HEAD:main
+          else
+            echo "no changes to commit."
+          fi
