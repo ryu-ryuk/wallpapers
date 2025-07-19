@@ -1,6 +1,7 @@
 name: Update Wallpaper Gallery
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - "*.jpg"
