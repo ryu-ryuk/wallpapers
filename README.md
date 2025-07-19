@@ -43,8 +43,7 @@
 | <img src="wallhaven-2yoyj9_nord.jpg" width="400"> | <img src="wallhaven-6dkrzx_nord.jpg" width="400"> | <img src="wallhaven-7pg1m9_nord.jpg" width="400"> |
 | <img src="wallhaven-7pmrro_nord.jpg" width="400"> | <img src="wallhaven-7pxxj9_nord.jpg" width="400"> | <img src="wallhaven-d6o26m_nord.jpg" width="400"> |
 | <img src="wallhaven-dpr6jl_nord.jpg" width="400"> | <img src="wallhaven-o566w7_nord.png" width="400"> | <img src="wallhaven-o5xrep_nord.jpg" width="400"> |
-| <img src="wallhaven-vqg8v5_nord.jpg" width="400"> | <img src="wallpaper2you_199972.gif" width="400"> | <img src="windows-xp.jpg" width="400"> |
-| <img src="xBJPpY.gif" width="400"> |
+| <img src="wallhaven-vqg8v5_nord.jpg" width="400"> | <img src="windows-xp.jpg" width="400"> | <img src="xBJPpY.gif" width="400"> |
 
 <!-- END_WALLPAPER_GALLERY -->
 
