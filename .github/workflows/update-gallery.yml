@@ -6,7 +6,6 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    # add permissions for the github_token to create a pr
     permissions:
       contents: write
       pull-requests: write
@@ -28,8 +27,7 @@ jobs:
           python gen.py
           python update_readme.py
 
-      - name: create pull request
-        # the gh cli is pre-installed on runners
+      - name: create and auto-merge pull request
         env:
           # use the default token which has the permissions we set above
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,17 +37,24 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           # create a new branch
-          git checkout -b update-gallery-${{ github.run_id }}
+          BRANCH_NAME="auto-gallery-update/${{ github.run_id }}"
+          git checkout -b $BRANCH_NAME
 
           # add and commit changes if they exist
           git add README.md WALLPAPER_GALLERY.md
           if ! git diff --cached --quiet; then
+            echo "changes found, creating pull request..."
             git commit -m "auto: update wallpaper gallery"
-            git push origin update-gallery-${{ github.run_id }}
+            git push origin $BRANCH_NAME
+            
+            # create the pull request
             gh pr create \
               --title "Auto: Update Wallpaper Gallery" \
               --body "Automated wallpaper gallery update." \
               --base main
+              
+            # merge the pull request automatically
+            gh pr merge $BRANCH_NAME --auto --squash --delete-branch
           else
             echo "no changes to commit."
           fi
